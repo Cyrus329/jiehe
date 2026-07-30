@@ -1,0 +1,22 @@
+{
+  "name": "专升本题库训练中心 v58 完整题组分类",
+  "short_name": "题库v58",
+  "description": "专升本题库 v59：1202道唯一题，9套完整题组；新增汉字编码与字符编码15题完整题组。",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7f8f5",
+  "theme_color": "#147a7e",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
