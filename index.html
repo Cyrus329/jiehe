@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#147a7e">
+  <title>专升本题库训练中心｜v58 完整题组分类与作答状态版</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css?v=20260729-v57">
+  <link rel="stylesheet" href="math-prerender.css?v=20260729-v57">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Question Bank</p>
+        <h1>专升本题库训练中心 <small>7.16 第1天</small></h1>
+      </div>
+      <div class="top-actions">
+        <button class="icon-button" id="reviewQueueButton" type="button" title="只刷今天该复习的题" aria-label="今日复习队列">
+          <span aria-hidden="true">↻</span><span>今日复习</span>
+        </button>
+        <button class="icon-button secondary" id="wrongBookModeButton" type="button" title="只刷错题本" aria-label="只刷错题本">
+          <span aria-hidden="true">✕</span><span>错题本</span>
+        </button>
+        <button class="icon-button secondary" id="wrongPlannerButton" type="button" title="按错因规划并生成类似题" aria-label="错题规划">
+          <span aria-hidden="true">▦</span><span>错题规划</span>
+        </button>
+        <button class="icon-button complete-set-entry" id="completeSetsButton" type="button" title="查看已完整上传的蓝色森林整套题目" aria-label="完整题组库">
+          <span aria-hidden="true">▣</span><span>完整题组</span>
+        </button>
+        <button class="icon-button secondary" id="quickBrowseButton" type="button" title="快速查看当前正在做的完整题组" aria-label="当前题组快速查阅">
+          <span aria-hidden="true">⌕</span><span>快速查阅</span>
+        </button>
+        <button class="icon-button secondary" id="auditModeButton" type="button" title="进入解析核查模式" aria-label="解析核查模式">
+          <span aria-hidden="true">⚑</span><span>核查模式</span>
+        </button>
+        <button class="icon-button secondary" id="studyModeButton" type="button" title="切换单题学习模式" aria-label="单题模式">
+          <span aria-hidden="true">□</span><span>单题模式</span>
+        </button>
+        <button class="icon-button secondary" id="textModeButton" type="button" title="切换图文版和纯文字版" aria-label="纯文字版">
+          <span aria-hidden="true">文</span><span>纯文字版</span>
+        </button>
+        <button class="icon-button secondary" id="autoHideMasteredButton" type="button" title="任意题做对1次后自动完成，不再出现在刷题和复习中" aria-label="做对一次即完成">
+          <span aria-hidden="true">✓</span><span>做对一次隐藏</span>
+        </button>
+        <button class="icon-button secondary" id="timerButton" type="button" title="倒计时刷题" aria-label="倒计时刷题">
+          <span aria-hidden="true">⏱</span><span>倒计时</span>
+        </button>
+        <button class="icon-button secondary reset-all-choice-trigger" id="resetAllChoicesButton" type="button" title="一键清除全部题目的已选标识，保留统计和错题本" aria-label="重置全部选项">
+          <span aria-hidden="true">↺</span><span>重置作答</span>
+        </button>
+        <button class="icon-button secondary" id="importBackupButton" type="button" title="导入以前导出的本地备份，恢复做题记录" aria-label="导入备份">
+          <span aria-hidden="true">⬆</span><span>导入备份</span>
+        </button>
+        <button class="icon-button" id="cloudButton" type="button" title="导出本地备份，防止记录丢失" aria-label="导出备份">
+          <span aria-hidden="true">⬇</span><span>导出备份</span>
+        </button>
+      </div>
+    </header>
+<header class="mobile-app-top" aria-label="手机端顶部导航">
+      <div>
+        <p id="mobileScreenTitle" class="mobile-screen-title">刷题</p>
+        <strong>专升本题库</strong>
+      </div>
+      <div class="mobile-top-actions">
+        <button class="mobile-pill complete-mobile-pill" id="mobileCompleteSetsButton" type="button">完整</button>
+        <button class="mobile-pill" id="mobileQuickBrowseButton" type="button">查题</button>
+        <button class="mobile-pill" id="mobileFilterToggle" type="button">筛选</button>
+        <button class="mobile-pill timer-pill" id="mobileTimerPill" type="button">25:00</button>
+      </div>
+    </header>
+
+    <section class="toolbar" aria-label="题库筛选">
+      <label class="field search-field">
+        <span>搜索</span>
+        <input id="searchInput" type="search" placeholder="题号、考点、关键词">
+      </label>
+      <label class="field">
+        <span>作业大标题</span>
+        <select id="assignmentFilter">
+          <option value="all">全部作业</option>
+        </select>
+      </label>
+      <label class="field">
+        <span>科目</span>
+        <select id="subjectFilter">
+          <option value="all">全部可刷</option>
+        </select>
+      </label>
+      <label class="field">
+        <span>章节</span>
+        <select id="chapterFilter">
+          <option value="all">全部</option>
+        </select>
+      </label>
+      <label class="field">
+        <span>题型</span>
+        <select id="typeFilter">
+          <option value="all">全部题型</option>
+        </select>
+      </label>
+
+      <label class="field">
+        <span>题源</span>
+        <select id="sourceFilter">
+          <option value="all">全部题源</option>
+        </select>
+      </label>
+      <label class="field">
+        <span>日期</span>
+        <select id="dayFilter">
+          <option value="all">全部日期</option>
+        </select>
+      </label>
+      <label class="field">
+        <span>状态</span>
+        <select id="statusFilter">
+          <option value="all">全部</option>
+          <option value="dueReview">今日复习</option>
+          <option value="weakChapter">薄弱章节</option>
+          <option value="mastered">已完成（做对过）</option>
+          <option value="answerReview">待核对题库</option>
+          <option value="auditQueue">解析核查模式</option>
+          <option value="auditFeedback">我标记的问题</option>
+          <option value="auditLocked">解析已锁定</option>
+          <option value="auditReference">原图备查/未逐题</option>
+          <option value="auditAnswerOnly">仅答案</option>
+          <option value="auditMissing">无答案解析</option>
+          <option value="unseen">未做</option>
+          <option value="wrong">最近做错</option>
+          <option value="correct">最近做对</option>
+          <option value="wrongBook">已进错题本</option>
+        </select>
+      </label>
+      <label class="field">
+        <span>难度</span>
+        <select id="difficultyFilter">
+          <option value="all">全部</option>
+          <option value="1">难度 1</option>
+          <option value="2">难度 2</option>
+          <option value="3">难度 3</option>
+          <option value="4">难度 4</option>
+          <option value="5">难度 5</option>
+        </select>
+      </label>
+    </section>
+
+    <section class="complete-set-active-bar" id="completeSetActiveBar" hidden>
+      <div><span>完整题组模式</span><strong id="completeSetActiveTitle"></strong><em id="completeSetActiveMeta"></em></div>
+      <div class="complete-set-active-actions"><button class="secondary-button" id="completeSetQuickButton" type="button">题目目录</button><button class="small-button" id="completeSetExitButton" type="button">退出整套</button></div>
+    </section>
+
+    <section class="stats-grid" aria-label="统计">
+      <div class="stat-tile">
+        <span>题库</span>
+        <strong id="totalCount">0</strong>
+      </div>
+      <div class="stat-tile">
+        <span>当前筛选</span>
+        <strong id="filteredCount">0</strong>
+      </div>
+      <div class="stat-tile">
+        <span>最近做错</span>
+        <strong id="wrongCount">0</strong>
+      </div>
+      <div class="stat-tile">
+        <span>已进错题本</span>
+        <strong id="wrongBookCount">0</strong>
+      </div>
+      <div class="stat-tile">
+        <span>今日复习</span>
+        <strong id="dueReviewCount">0</strong>
+      </div>
+      <div class="stat-tile">
+        <span>连续打卡</span>
+        <strong id="streakCount">0</strong>
+      </div>
+      <div class="stat-tile">
+        <span>今日完成</span>
+        <strong id="dailyProgressCount">0/80</strong>
+      </div>
+      <div class="stat-tile">
+        <span>已完成</span>
+        <strong id="masteredCount">0</strong>
+      </div>
+      <div class="stat-tile">
+        <span>累计时长</span>
+        <strong id="totalStudyTimeCount">0分钟</strong>
+      </div>
+    </section>
+
+    <section class="dashboard-panel" id="dashboardPanel" aria-label="学习分析"></section>
+
+
+    <section class="mobile-me-panel" id="mobileMePanel" aria-label="我的">
+      <div class="mobile-me-card">
+        <p class="eyebrow">Data</p>
+        <h2>题库与备份</h2>
+        <p class="mobile-me-muted">当前题库 <strong id="mobileTotalCount">0</strong> 道，当前筛选 <strong id="mobileFilteredCount">0</strong> 道。</p>
+        <div class="mobile-me-grid">
+          <button class="primary-button" id="mobileCloudButton" type="button">导出本地备份</button>
+          <button class="secondary-button" id="mobileImportBackupButton" type="button">导入本地备份</button>
+        </div>
+      </div>
+      <div class="mobile-me-card">
+        <p class="eyebrow">Study Time</p>
+        <h2>学习时长</h2>
+        <p class="mobile-me-muted">累计 <strong id="mobileTotalStudyTime">0分钟</strong>，今日 <strong id="mobileTodayStudyTime">0分钟</strong>。</p>
+      </div>
+      <div class="mobile-me-card">
+        <p class="eyebrow">Settings</p>
+        <h2>学习设置</h2>
+        <label class="mobile-setting-row">
+          <span>每日目标</span>
+          <input id="mobileDailyGoalInput" type="number" min="10" max="500" step="10" value="80">
+        </label>
+        <div class="mobile-me-grid">
+          <button class="secondary-button" id="mobileMeStudyModeButton" type="button">单题模式</button>
+          <button class="secondary-button" id="mobileTextModeButton" type="button">纯文字版</button>
+          <button class="secondary-button" id="mobileMeAutoHideMasteredButton" type="button">做对一次隐藏</button>
+          <button class="secondary-button" id="mobileMeTimerButton" type="button">开始倒计时</button>
+          <button class="secondary-button reset-all-choice-trigger" id="mobileResetAllChoicesButton" type="button">重置全部选项</button>
+          <button class="secondary-button" id="mobileWrongPlannerButton" type="button">错题规划与类似题</button>
+          <button class="secondary-button" id="mobileBackupButton" type="button">导出本地备份</button>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="mobile-similar-panel" id="mobileSimilarPanel" aria-label="同类题"></section>
+
+    <main class="workspace">
+      <section class="list-panel" aria-label="题目列表">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">List</p>
+            <h2>题目</h2>
+          </div>
+          <div class="pager">
+            <button id="prevPageButton" type="button" class="small-button" aria-label="上一页">‹</button>
+            <span id="pageInfo">1 / 1</span>
+            <button id="nextPageButton" type="button" class="small-button" aria-label="下一页">›</button>
+          </div>
+        </div>
+        <div class="questions-list" id="questionsList" aria-live="polite"></div>
+      </section>
+
+      <section class="detail-panel" id="detailPanel" aria-label="题目详情">
+        <div class="empty-detail">
+          <p class="eyebrow">Detail</p>
+          <h2>当前题库为空</h2>
+          <p>题库已按课后作业、暑假集训和额外题库统一整理；可使用“快速查阅”按题组、题型和原序号直接跳转。</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <nav class="mobile-tabbar" aria-label="手机端底部导航">
+    <button class="mobile-tab-button active" type="button" data-mobile-tab="quiz"><span>刷题</span></button>
+    <button class="mobile-tab-button" type="button" data-mobile-tab="similar"><span>同类</span></button>
+    <button class="mobile-tab-button" type="button" data-mobile-tab="review"><span>复习</span></button>
+    <button class="mobile-tab-button" type="button" data-mobile-tab="stats"><span>统计</span></button>
+    <button class="mobile-tab-button" type="button" data-mobile-tab="me"><span>我的</span></button>
+  </nav>
+
+
+  <div class="quick-browse-modal complete-sets-modal" id="completeSetsModal" hidden>
+    <div class="quick-browse-backdrop" data-complete-close></div>
+    <section class="quick-browse-sheet complete-sets-sheet" role="dialog" aria-modal="true" aria-labelledby="completeSetsTitle">
+      <header class="quick-browse-head">
+        <div><p class="eyebrow">Complete Sets</p><h2 id="completeSetsTitle">蓝色森林完整题组</h2></div>
+        <button class="small-button" id="completeSetsCloseButton" type="button" aria-label="关闭">×</button>
+      </header>
+      <div class="complete-sets-intro"><strong>只收完整上传的整套资料</strong><span>按原资料页数或截图数、题型和原序号归档。这里是归档副本，作答记录与原题共用，不会重复统计。</span></div>
+      <div class="complete-subject-tabs" id="completeSetsSubjectTabs" aria-label="完整题组科目分类"></div>
+      <div class="quick-browse-controls complete-set-controls"><label class="field"><span>查找当前大类题组</span><input id="completeSetsSearchInput" type="search" placeholder="输入章节或作业名称"></label></div>
+      <div class="quick-browse-summary" id="completeSetsSummary"></div>
+      <div class="complete-sets-content" id="completeSetsContent"></div>
+    </section>
+  </div>
+
+  <div class="quick-browse-modal" id="quickBrowseModal" hidden>
+    <div class="quick-browse-backdrop" data-quick-close></div>
+    <section class="quick-browse-sheet" role="dialog" aria-modal="true" aria-labelledby="quickBrowseTitle">
+      <header class="quick-browse-head">
+        <div>
+          <p class="eyebrow">Quick Browse</p>
+          <h2 id="quickBrowseTitle">快速查阅题目</h2>
+        </div>
+        <button class="small-button" id="quickBrowseCloseButton" type="button" aria-label="关闭">×</button>
+      </header>
+      <div class="quick-browse-controls current-range-only">
+        <div class="quick-scope-note"><strong>仅显示当前题组</strong><span>自动跟随你正在做的范围，不再列出全部题库。</span></div>
+        <label class="field"><span>在当前题组内查找</span><input id="quickBrowseSearchInput" type="search" placeholder="输入题号、题型或关键词"></label>
+      </div>
+      <div class="quick-browse-summary" id="quickBrowseSummary"></div>
+      <div class="quick-browse-content" id="quickBrowseContent"></div>
+    </section>
+  </div>
+
+  <input id="backupFileInput" type="file" accept=".json,application/json" hidden>
+
+  <script src="math-render-cache.js?v=20260727-v51"></script>
+  <script src="core.js?v=20260729-v57"></script>
+  <script src="image-pack-summer.js"></script>
+  <script src="image-pack-homework-v54.js"></script>
+  <script src="image-pack-homework-v55.js"></script>
+  <script src="image-pack-homework-v57.js"></script>
+  <script src="image-pack-homework-v59.js"></script>
+  <script src="image-pack-bf-math-function.js"></script>
+  <script src="question-bank-data.js?v=20260730-v59-encoding-complete-import"></script>
+  <script src="word-data.js?v=20260730-personal-phrases"></script>
+  <script src="app.js?v=20260730-v59-encoding-complete-import"></script>
+  <script src="knowledge-link-data.js?v=20260731-linked"></script>
+  <script src="knowledge-links.js?v=20260731-linked"></script>
+</body>
+</html>
